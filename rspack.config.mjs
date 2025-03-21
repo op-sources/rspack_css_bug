@@ -3,6 +3,7 @@ import { fileURLToPath } from "node:url";
 import { defineConfig } from "@rspack/cli";
 import { rspack } from "@rspack/core";
 import RefreshPlugin from "@rspack/plugin-react-refresh";
+import CssMinifier from "css-minimizer-webpack-plugin";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const isDev = process.env.NODE_ENV === "development";
@@ -59,9 +60,7 @@ export default defineConfig({
 	optimization: {
 		minimizer: [
 			new rspack.SwcJsMinimizerRspackPlugin(),
-			new rspack.LightningCssMinimizerRspackPlugin({
-				minimizerOptions: { targets }
-			})
+      		new CssMinifier(),
 		]
 	},
 	experiments: {
